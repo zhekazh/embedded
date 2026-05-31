@@ -1,0 +1,45 @@
+{
+	"folders": [
+		{
+			"name": "m0-blink (root)",
+			"path": "."
+		},
+		{
+			"name": "blink (ESP32)",
+			"path": "blink"
+		},
+		{
+			"name": "host-c",
+			"path": "host-c"
+		}
+	],
+	"extensions": {
+		"recommendations": [
+			"platformio.platformio-ide"
+		],
+		"unwantedRecommendations": [
+			"ms-vscode.cpptools-extension-pack"
+		]
+	},
+	"settings": {
+		"files.encoding": "utf8",
+		"files.eol": "\n",
+		"files.insertFinalNewline": true,
+		"files.trimTrailingWhitespace": true
+	},
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [
+			{
+				"name": "Wokwi GDB",
+				"type": "cppdbg",
+				"request": "launch",
+				"program": "${workspaceFolder:blink (ESP32)}/.pio/build/esp32dev/firmware.elf",
+				"cwd": "${workspaceFolder:blink (ESP32)}",
+				"MIMode": "gdb",
+				"miDebuggerPath": "C:/Users/User/.platformio/packages/toolchain-xtensa-esp32/bin/xtensa-esp32-elf-gdb.exe",
+				"miDebuggerServerAddress": "localhost:3333"
+			}
+		]
+	}
+}
