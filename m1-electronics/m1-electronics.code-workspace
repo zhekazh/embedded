@@ -1,0 +1,38 @@
+{
+	"folders": [
+		{
+			"name": "m1-electronics (root)",
+			"path": "."
+		},
+		{
+			"name": "photo-led (ESP32)",
+			"path": "photo-led"
+		}
+	],
+	"extensions": {
+		"recommendations": [
+			"platformio.platformio-ide",
+			"wokwi.wokwi-vscode",
+			"ms-vscode.cpptools",
+			"marus25.cortex-debug",
+			"dan-c-underwood.arm",
+			"ms-vscode.cmake-tools",
+			"twxs.cmake",
+			"github.vscode-github-actions",
+			"editorconfig.editorconfig",
+			"yzhang.markdown-all-in-one",
+			"streetsidesoftware.code-spell-checker",
+			"streetsidesoftware.code-spell-checker-ukrainian"
+		],
+		"unwantedRecommendations": [
+			"ms-vscode.cpptools-extension-pack"
+		]
+	},
+	"settings": {
+		"files.encoding": "utf8",
+		"files.eol": "\n",
+		"files.insertFinalNewline": true,
+		"files.trimTrailingWhitespace": true,
+		"cSpell.language": "en,uk"
+	}
+}

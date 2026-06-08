@@ -11,6 +11,9 @@ build/
 *.bin
 *.hex
 *.map
+*.log
+*.vcd
+_chk.txt
 
 CLAUDE.md
 ROADMAP_EMBEDDED.md
