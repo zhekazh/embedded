@@ -1,0 +1,72 @@
+{
+	"folders": [
+		{
+			"name": "embedded (корінь: docs)",
+			"path": "."
+		},
+		{
+			"name": "m2 · C (host)",
+			"path": "m2-c"
+		},
+		{
+			"name": "m0 · blink (ESP32)",
+			"path": "m0-blink/blink"
+		},
+		{
+			"name": "m1 · photo-led (ESP32)",
+			"path": "m1-electronics/photo-led"
+		}
+	],
+	"extensions": {
+		"recommendations": [
+			"platformio.platformio-ide",
+			"wokwi.wokwi-vscode",
+			"ms-vscode.cpptools",
+			"marus25.cortex-debug",
+			"dan-c-underwood.arm",
+			"ms-vscode.cmake-tools",
+			"twxs.cmake",
+			"github.vscode-github-actions",
+			"editorconfig.editorconfig",
+			"yzhang.markdown-all-in-one",
+			"streetsidesoftware.code-spell-checker",
+			"streetsidesoftware.code-spell-checker-ukrainian"
+		],
+		"unwantedRecommendations": [
+			"ms-vscode.cpptools-extension-pack"
+		]
+	},
+	"settings": {
+		"files.encoding": "utf8",
+		"files.eol": "\n",
+		"files.insertFinalNewline": true,
+		"files.trimTrailingWhitespace": true,
+		"cSpell.language": "en,uk",
+		"platformio-ide.customPMPython": "/usr/bin/python3"
+	},
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [
+			{
+				"name": "Wokwi GDB — m0-blink",
+				"type": "cppdbg",
+				"request": "launch",
+				"program": "${workspaceFolder:m0 · blink (ESP32)}/.pio/build/esp32dev/firmware.elf",
+				"cwd": "${workspaceFolder:m0 · blink (ESP32)}",
+				"MIMode": "gdb",
+				"miDebuggerPath": "${userHome}/.platformio/packages/toolchain-xtensa-esp32/bin/xtensa-esp32-elf-gdb",
+				"miDebuggerServerAddress": "localhost:3333"
+			},
+			{
+				"name": "Wokwi GDB — m1-photo-led",
+				"type": "cppdbg",
+				"request": "launch",
+				"program": "${workspaceFolder:m1 · photo-led (ESP32)}/.pio/build/esp32dev/firmware.elf",
+				"cwd": "${workspaceFolder:m1 · photo-led (ESP32)}",
+				"MIMode": "gdb",
+				"miDebuggerPath": "${userHome}/.platformio/packages/toolchain-xtensa-esp32/bin/xtensa-esp32-elf-gdb",
+				"miDebuggerServerAddress": "localhost:3333"
+			}
+		]
+	}
+}
