@@ -15,6 +15,9 @@ build/
 *.vcd
 _chk.txt
 
+# скомпільовані host-C вправи без розширення (m0 збирає прямо в теку; m2 — у build/)
+m0-blink/host-c/reg
+
 CLAUDE.md
 ROADMAP_EMBEDDED.md
 PROJECT_README_TEMPLATE.md

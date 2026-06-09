@@ -9,6 +9,10 @@
 (VS Code + PlatformIO), отримати перший blink на емуляторі й зрозуміти ланцюг
 `.c → .o → .elf → .bin` та роль GDB/OpenOCD.
 
+## Підпроєкти
+- [blink/](blink/README.md) — перший blink на ESP32 + локальний дебаг-цикл
+- [host-c/](host-c/README.md) — чиста C-вправа: set/clear/toggle біта в «регістрі» (+ розбір бітів/масок/вказівників)
+
 ## Теорія (стисло, своїми словами)
 - **Мислення.** Програма не «відповіла й завершилась» — вона крутиться у вічному
   циклі, поки є живлення. Я сам відповідаю за кожен байт; немає GC; «затримка» —
@@ -70,10 +74,10 @@
 
 7. Дебаг: у `wokwi.toml` додати `gdbServerPort = 3333`. Конфіг дебагера тримати **не** в
    `blink/.vscode/launch.json` (його PlatformIO регенерує й затирає ручні правки), а в
-   `m0-blink.code-workspace` → секція `"launch"`: один `cppdbg` з `name: "Wokwi GDB"`,
+   `embedded.code-workspace` → секція `"launch"`: один `cppdbg` з `name: "Wokwi GDB — m0-blink"`,
    `miDebuggerPath` → xtensa-gdb із `.platformio/packages`, `miDebuggerServerAddress: localhost:3333`,
-   `program` → `.elf` (у multi-root шлях через `${workspaceFolder:blink (ESP32)}`). Відкрити проєкт через
-   *Open Workspace from File* → в «Run and Debug» вибрати `Wokwi GDB`. Потрібне розширення `ms-vscode.cpptools`.
+   `program` → `.elf` (у multi-root шлях через `${workspaceFolder:m0 · blink (ESP32)}`). Відкрити проєкт через
+   *Open Workspace from File* → в «Run and Debug» вибрати `Wokwi GDB — m0-blink`. Потрібне розширення `ms-vscode.cpptools`.
    Build → `F1 → Wokwi: Start Simulator and Wait for Debugger` → `F5`.
    _Перевірка:_ виконання спиняється на breakpoint; працюють F10/F11; у VARIABLES видно змінні.
 
@@ -96,7 +100,7 @@
   `GDB ↔ OpenOCD ↔ адаптер ↔ чіп` цілком підмінено симулятором — апаратний дебагер не задіюється.
 - **Доданий `Wokwi GDB` зникає після Build / зміни `platformio.ini`** → PlatformIO регенерує
   `blink/.vscode/launch.json` (шапка «AUTOMATICALLY GENERATED… DO NOT MODIFY») і затирає ручні
-  конфіги. Фікс: тримати `Wokwi GDB` не в проєктному `launch.json`, а в `m0-blink.code-workspace`
+  конфіги. Фікс: тримати `Wokwi GDB` не в проєктному `launch.json`, а в `embedded.code-workspace`
   → секція `"launch"` — цей файл PlatformIO не чіпає, тож конфіг переживає будь-який rebuild.
   Умова: відкривати проєкт через *Open Workspace from File*, інакше workspace-конфіги не видно в дропдауні.
 - **IntelliSense червонить `#include`, а Build = SUCCESS** → лінтер відстає; `PlatformIO: Rebuild IntelliSense Index`.
@@ -109,7 +113,3 @@
 ## Джерела
 - docs.platformio.org — встановлення PlatformIO IDE
 - docs.wokwi.com — Wokwi for VS Code: getting started, project config, debugging
-
-## Підпроєкти
-- [blink/](blink/README.md) — перший blink на ESP32 + локальний дебаг-цикл
-- [host-c/](host-c/README.md) — чиста C-вправа: set/clear/toggle біта в «регістрі» (+ розбір бітів/масок/вказівників)
