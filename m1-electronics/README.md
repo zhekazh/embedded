@@ -73,4 +73,4 @@
 - All About Circuits; electronics-tutorials.ws — база з електроніки.
 - Falstad CircuitJS (falstad.com/circuit) — симуляція аналогових схем.
 - Wokwi Docs — `wokwi-photoresistor-sensor` (вбудований дільник LDR + 10 кΩ), ESP32-профіль.
-- Random Nerd Tutorials — міграція ESP32 Arduino core 2.x → 3.x (новий PWM/LEDC API).
+- Random Nerd Tutorials — різниця PWM/LEDC API між Arduino core 2.x і 3.x (наша збірка — 2.0.17).
