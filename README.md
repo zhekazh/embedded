@@ -19,7 +19,7 @@ GDB + OpenOCD · FreeRTOS · GCC (`arm-none-eabi` / host) · GitHub Actions (CI)
 ## Модулі
 - [x] [M0 · Setup, мислення, інструментарій](m0-blink/README.md)
 - [ ] [M1 · Основи електроніки та вимірювань](m1-electronics/README.md)
-- [ ] [M2 · C по-справжньому (хост, unit-тести)](m2-c/README.md)
+- [x] [M2 · C по-справжньому (хост, unit-тести)](m2-c/README.md)
 - [ ] M3 · Архітектура та bare metal
 - [ ] M4 · Сучасний C++ для embedded
 - [ ] M5 · STM32 руками (GPIO, UART/SPI/I2C, таймери, DMA)
