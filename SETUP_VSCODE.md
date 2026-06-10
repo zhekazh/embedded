@@ -46,7 +46,7 @@ _Перевірка:_ у Explorer видно кілька папок workspace �
 - `platformio.platformio-ide` — збірка/прошивка/монітор
 - `wokwi.wokwi-vscode` — симуляція ESP32
 - `ms-vscode.cpptools` — IntelliSense/дебаг C/C++
-- `marus25.cortex-debug`, `dan-c-underwood.arm` — для ARM/STM32 (з M5)
+- `marus25.cortex-debug`, `dan-c-underwood.arm` — для перенесення на ARM/STM32 (опційно; ESP32 дебажиться через cppdbg/GDB)
 - `streetsidesoftware.code-spell-checker` + `…-ukrainian` — орфографія (en+uk)
 
 > **НЕ став** `C/C++ Extension Pack` — конфліктує з PlatformIO. Він у

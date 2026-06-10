@@ -1,12 +1,12 @@
 # Embedded C/C++ (bare-metal) — практичний журнал
 
 Покроковий практичний шлях у firmware-розробку: від тулчейну й embedded-мислення
-до STM32, RTOS, сенсорів і телеметрії. Кожен модуль самодостатній — теорія
+до ESP32 на регістрах, RTOS, сенсорів і телеметрії. Кожен модуль самодостатній — теорія
 своїми словами, відтворювані з нуля кроки/команди, артефакти й лог факапів.
 
 ## Стек / інструменти
-VS Code + PlatformIO · ESP32 (старт) → STM32 (ядро) · Wokwi / Renode (емуляція) ·
-GDB + OpenOCD · FreeRTOS · GCC (`arm-none-eabi` / host) · GitHub Actions (CI)
+VS Code + PlatformIO · ESP32 (практика) · STM32/Cortex-M (перенос) · Wokwi / Renode (емуляція) ·
+GDB + OpenOCD · FreeRTOS · GCC (`xtensa-esp32` / host) · GitHub Actions (CI)
 
 ## Як читати / відтворити
 Іти модулями по порядку. У кожній теці `mN-*` — власний `README.md` з кроками
@@ -22,7 +22,7 @@ GDB + OpenOCD · FreeRTOS · GCC (`arm-none-eabi` / host) · GitHub Actions (CI)
 - [x] [M2 · C по-справжньому (хост, unit-тести)](m2-c/README.md)
 - [ ] M3 · Архітектура та bare metal
 - [ ] M4 · Сучасний C++ для embedded
-- [ ] M5 · STM32 руками (GPIO, UART/SPI/I2C, таймери, DMA)
+- [ ] M5 · ESP32 руками (GPIO, UART/SPI/I2C, таймери, DMA)
 - [ ] M6 · Тестування і дебаг (Unity/CppUTest, HardFault, RTT)
 - [ ] M7 · RTOS (FreeRTOS)
 - [ ] M8 · Сенсори, сигнали, керування (IMU/GPS, фільтри, PID)
