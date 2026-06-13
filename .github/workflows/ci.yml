@@ -1,0 +1,22 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  m2-c:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install cppcheck
+        run: sudo apt-get update && sudo apt-get install -y cppcheck
+      - name: Build and test (sanitizers)
+        working-directory: m2-c/frame-codec
+        run: make test
+      - name: Static analysis
+        working-directory: m2-c/frame-codec
+        run: make lint
+      - name: Explore (memory/pointers, host)
+        working-directory: m2-c/explore
+        run: make run
