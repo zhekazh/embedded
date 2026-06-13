@@ -10,7 +10,8 @@
       "top": -120,
       "left": 130,
       "attrs": { "i2cAddress": "0x3c" }
-    }
+    },
+    { "type": "wokwi-logic-analyzer", "id": "logic1", "top": 130, "left": 160, "attrs": {} }
   ],
   "connections": [
     [ "esp:TX", "$serialMonitor:RX", "", [] ],
@@ -18,7 +19,10 @@
     [ "oled1:VCC", "esp:3V3", "red", [ "v0" ] ],
     [ "oled1:GND", "esp:GND.1", "black", [ "v0" ] ],
     [ "oled1:SDA", "esp:21", "green", [ "v0" ] ],
-    [ "oled1:SCL", "esp:22", "blue", [ "v0" ] ]
+    [ "oled1:SCL", "esp:22", "blue", [ "v0" ] ],
+    [ "logic1:D0", "esp:21", "green", [ "h0" ] ],
+    [ "logic1:D1", "esp:22", "blue", [ "h0" ] ],
+    [ "logic1:GND", "esp:GND.1", "black", [ "h0" ] ]
   ],
   "dependencies": {}
 }
