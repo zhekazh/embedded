@@ -1,0 +1,29 @@
+# --- Build / generated ---
+.pio/
+build/
+managed_components/
+dependencies.lock
+sdkconfig
+sdkconfig.old
+.pioenvs
+*.o
+*.swp
+
+# --- Важкі апстрім-компоненти з шаблону Bluepad32 ---
+# Не комітимо в навчальний репо (64M arduino + 14M btstack + ...).
+# Відновлення — див. README, розділ «Відтворення з нуля».
+/components/arduino/
+/components/btstack/
+/components/bluepad32/
+/components/bluepad32_arduino/
+/components/cmd_nvs/
+/components/cmd_nvs_4.4/
+/components/cmd_system/
+/components/cmd_system_4.4/
+
+# Залишаємо в git: components/Adafruit_* (наші OLED-компоненти),
+# main/, platformio.ini, sdkconfig.defaults*, CMakeLists.txt, README.
+
+# --- IDE ---
+.vscode/
+.idea/
