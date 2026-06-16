@@ -27,6 +27,14 @@
 		{
 			"name": "m3 · frame_fsm (host)",
 			"path": "m3-arch/frame_fsm"
+		},
+		{
+			"name": "sandbox · esp32 (PlatformIO)",
+			"path": "sandbox-esp32"
+		},
+		{
+			"name": "sandbox · esp32-ps4 (ESP-IDF/BT)",
+			"path": "sandbox-esp32-ps4"
 		}
 	],
 	"extensions": {
@@ -66,6 +74,9 @@
 				"cwd": "${workspaceFolder:m0 · blink (ESP32)}",
 				"MIMode": "gdb",
 				"miDebuggerPath": "${userHome}/.platformio/packages/toolchain-xtensa-esp32/bin/xtensa-esp32-elf-gdb",
+				"windows": {
+					"miDebuggerPath": "${userHome}/.platformio/packages/toolchain-xtensa-esp32/bin/xtensa-esp32-elf-gdb.exe"
+				},
 				"miDebuggerServerAddress": "localhost:3333"
 			},
 			{
@@ -76,6 +87,9 @@
 				"cwd": "${workspaceFolder:m1 · photo-led (ESP32)}",
 				"MIMode": "gdb",
 				"miDebuggerPath": "${userHome}/.platformio/packages/toolchain-xtensa-esp32/bin/xtensa-esp32-elf-gdb",
+				"windows": {
+					"miDebuggerPath": "${userHome}/.platformio/packages/toolchain-xtensa-esp32/bin/xtensa-esp32-elf-gdb.exe"
+				},
 				"miDebuggerServerAddress": "localhost:3333"
 			}
 		]

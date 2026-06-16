@@ -4,7 +4,9 @@
 збірка прошивки (PlatformIO), симуляція (Wokwi), компіляція й дебаг C на хості,
 дебаг прошивки через GDB. Усі приклади — на модулі **m0** (`m0-blink/`).
 
-> Середовище, під яке писано: **Linux** (Ubuntu/Pop!_OS), VS Code, system Python `/usr/bin/python3`.
+> Основні приклади — для **Linux** (Ubuntu/Pop!_OS). Репо працює і на **Windows
+> нативно** (без WSL): інструменти крос-платформні, відмінності зведені в розділі
+> [«Windows (нативно)»](#windows-нативно-відмінності-від-linux) наприкінці.
 > Репозиторій **emulator-first**: M0–M4 працюють без фізичної плати.
 
 ---
@@ -53,12 +55,15 @@ _Перевірка:_ у Explorer видно кілька папок workspace �
 > `unwantedRecommendations`, але cpptools усе одно може запропонувати його
 > своїм власним попапом → натисни **«Don't Show Again»** (записується глобально, більше не питатиме).
 
-PlatformIO Python уже зашитий у workspace:
+Після першого відкриття PlatformIO докачає свій Core у `~/.platformio` (хвилина-дві)
+і знайде Python автоматично. Якщо на твоїй машині треба явно вказати інтерпретатор
+(кілька Python, conda першим у PATH) — це **машинне** налаштування, тож виноси його
+в **локальний** `.vscode/settings.json` (git-ignored), а не в закомічений workspace
+(щоб шлях однієї ОС не ламав проєкт на іншій):
 ```jsonc
-// embedded.code-workspace → settings
-"platformio-ide.customPMPython": "/usr/bin/python3"
+// .vscode/settings.json (локальний, не комітиться)
+"platformio-ide.customPMPython": "/usr/bin/python3"   // Linux; на Windows — шлях до python.exe
 ```
-Після першого відкриття PlatformIO докачає свій Core у `~/.platformio` (хвилина-дві).
 
 _Перевірка:_ внизу зліва з'явилась іконка 🏠 (PlatformIO Home); у статус-барі — кнопки ✓ (Build), → (Upload), 🔌 (Monitor).
 
@@ -208,6 +213,32 @@ gdb ./reg
 > Збірка/тести — лише через `make` (`make test`); дебаг — звичайним системним `gdb`.
 > Окремий `c_cpp_properties.json` зазвичай не потрібен; додавай мінімальний (`-Isrc -Itest/unity`)
 > тільки якщо squiggles на локальних `#include "…"` усе ж з'являться.
+
+---
+
+## Windows (нативно): відмінності від Linux
+
+Та сама гілка працює на Windows **без WSL** — інструменти крос-платформні
+(PlatformIO, `idf.py`, CMake, Wokwi), відрізняються лише оболонка, шляхи й пакети.
+Кроки 1, 4, 5 ідентичні; решта — з поправками:
+
+| Крок | Linux | Windows (нативно) |
+|---|---|---|
+| 0. Передумови | `sudo apt install git build-essential gdb python3` | Git for Windows + VS Code (winget/офсайт); **MSYS2** (`pacman -S mingw-w64-x86_64-gcc gdb make`) для host-C; окремий Python не потрібен — PlatformIO має власний |
+| 2. PlatformIO Python | автодетект; за потреби — локальний `.vscode/settings.json` | те саме; шлях — до `python.exe` (напр. `C:/Users/<ти>/AppData/Local/Programs/Python/Python3xx/python.exe`) |
+| 3. `pio` у PATH | `~/.platformio/penv/bin` | `%USERPROFILE%\.platformio\penv\Scripts` — додати в PATH через PowerShell-профіль або System Environment Variables |
+| 6. GDB-шлях | `…/xtensa-esp32-elf-gdb` | `…\xtensa-esp32-elf-gdb.exe` — у workspace `launch` уже є окремий `windows`-блок, нічого правити не треба |
+| 7. host-C (gcc/make) | нативно | у шеллі **MSYS2 MinGW64**: `make test` працює; **TSan недоступний** (`make tsan` чесно пропуститься) |
+
+**ESP-IDF (m3 `bringup`, `sandbox-esp32-ps4`):** на Windows працюй з ярлика
+**«ESP-IDF PowerShell»** (від інсталятора ESP-IDF), де `idf.py` уже активований; або
+через обгортку [m3-arch/bringup/build.ps1](m3-arch/bringup/build.ps1) (аналог `make build`).
+Кореневий `CMakeLists.txt` усіх проєктів використовує `$ENV{IDF_PATH}`, тож шлях до
+IDF не хардкоджений. Детальніше — у [m3-arch/README.md](m3-arch/README.md).
+
+**Граблі Windows (з `sandbox-esp32-ps4`):** ESP-IDF **не збирається, якщо в шляху є
+кирилиця**; `click>=8.2` ламає esptool (відкат на `8.1.8`); зомбі-`esptool` тримає
+COM-порт зайнятим (закрий монітор / зніми процес).
 
 ---
 
