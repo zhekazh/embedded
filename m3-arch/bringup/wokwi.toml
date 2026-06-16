@@ -1,0 +1,6 @@
+# embedded/m3-arch/bringup/wokwi.toml
+[wokwi]
+version = 1
+firmware = 'build/flasher_args.json'
+elf = 'build/bringup.elf'
+gdbServerPort = 3333

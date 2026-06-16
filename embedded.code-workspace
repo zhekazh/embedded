@@ -15,6 +15,18 @@
 		{
 			"name": "m1 · photo-led (ESP32)",
 			"path": "m1-electronics/photo-led"
+		},
+		{
+			"name": "m3 · bringup (ESP-IDF)",
+			"path": "m3-arch/bringup"
+		},
+		{
+			"name": "m3 · isr-ringbuf (host)",
+			"path": "m3-arch/isr-ringbuf"
+		},
+		{
+			"name": "m3 · frame_fsm (host)",
+			"path": "m3-arch/frame_fsm"
 		}
 	],
 	"extensions": {
@@ -41,8 +53,7 @@
 		"files.eol": "\n",
 		"files.insertFinalNewline": true,
 		"files.trimTrailingWhitespace": true,
-		"cSpell.language": "en,uk",
-		"platformio-ide.customPMPython": "/usr/bin/python3"
+		"cSpell.language": "en,uk"
 	},
 	"launch": {
 		"version": "0.2.0",

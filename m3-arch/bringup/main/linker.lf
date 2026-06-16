@@ -1,0 +1,4 @@
+[mapping:ringbuf]
+archive: libmain.a
+entries:
+    ringbuf (noflash)
