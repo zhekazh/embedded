@@ -13,16 +13,14 @@
 атоміки/бар'єри. ⤳ той самий патерн розгорнемо в M7 (RTOS).
 
 ## Підпроєкти
-- [bringup/](bringup/) — ESP-IDF firmware: регістровий GPIO (`W1TS`/`W1TC`) +
-  `gptimer`-ISR блимає LED на GPIO4; `app_main` вільний. Збірка — CMake/`idf.py`.
-- [isr-ringbuf/](isr-ringbuf/) — host-C: SPSC lock-free кільцевий буфер на
-  `_Atomic` з acquire/release-семантикою ([ringbuf.c](isr-ringbuf/src/ringbuf.c)),
-  Unity-тести + окремий **ThreadSanitizer**-харнес
-  ([tsan_ringbuf.c](isr-ringbuf/test/tsan_ringbuf.c)).
-- [frame_fsm/](frame_fsm/) — host-C: байтовий **кінцевий автомат** кадру
-  (STX/ETX-кадрування з ре-синком на шумі та вкладеному STX),
-  [frame_fsm.c](frame_fsm/src/frame_fsm.c); Unity-тести (чистий кадр, шум до STX,
-  ре-синк, back-to-back).
+> Хаб із посиланнями: покрокові команди й «граблі» кожного проєкту — у його README;
+> цей файл тримає наратив, теорію й критерій усього модуля.
+- [bringup/](bringup/README.md) — ESP-IDF firmware: регістровий GPIO (`W1TS`/`W1TC`) +
+  `gptimer`-ISR блимає LED на GPIO4; `ringbuf` у IRAM через `linker.lf`. Збірка — CMake/`idf.py`.
+- [isr-ringbuf/](isr-ringbuf/README.md) — host-C: SPSC lock-free кільцевий буфер на
+  `_Atomic` з acquire/release-семантикою, Unity-тести + **ThreadSanitizer**-харнес.
+- [frame_fsm/](frame_fsm/README.md) — host-C: байтовий **кінцевий автомат** кадру
+  (STX/ETX з ре-синком на шумі та вкладеному STX), Unity-тести.
 - [test/unity/](test/unity/) — вендорнутий Unity, спільний для host-проєктів M3
   (так само, як `m2-c/test/unity`).
 
@@ -73,49 +71,20 @@
   [embedded.code-workspace](../embedded.code-workspace).
 
 ## Кроки (відтворювані з нуля)
+> Високорівнева послідовність модуля; покрокові команди, перевірки й «граблі» —
+> у README кожного підпроєкту.
 
-### 1. Firmware `bringup` — регістрова ISR-блималка
-**Linux:**
-```bash
-cd m3-arch/bringup
-make build          # = активувати IDF (якщо треба) + idf.py build
-```
-**Windows (звичайний PowerShell):**
-```powershell
-cd m3-arch\bringup
-.\build.ps1         # = активувати IDF (якщо треба) + idf.py build
-```
-> Або з «ESP-IDF PowerShell» / уже активованого терміналу — напряму `idf.py build`
-> на будь-якій ОС.
-
-_Перевірка:_ наприкінці — `Project build complete`, з'являються `build/bringup.elf`
-і `build/bringup.bin`. У Wokwi (потрібен зібраний `.elf`/`flasher_args.json`,
-шляхи вже в [wokwi.toml](bringup/wokwi.toml)) LED на GPIO4 блимає ~2 рази/с
-(toggle кожні 250 мс), а серійник друкує `app_main free; toggles so far: N`.
-
-### 2. host-C `isr-ringbuf` — SPSC lock-free + санітайзери
-**Linux і Windows(MSYS2):**
-```bash
-cd m3-arch/isr-ringbuf
-make test           # Unity під ASan/UBSan
-```
-_Перевірка:_ `6 Tests 0 Failures 0 Ignored` / `OK`.
-
-**Лише Linux — перевірка на гонки:**
-```bash
-make tsan           # ThreadSanitizer, ASLR вимкнено (setarch -R)
-```
-_Перевірка:_ ганяє producer/consumer у двох потоках, TSan **без** data race.
-На Windows ця ціль чесно повідомить, що TSan лише для Linux, і пропуститься.
-
-### 3. host-C `frame_fsm` — кінцевий автомат кадру
-**Linux і Windows(MSYS2):**
-```bash
-cd m3-arch/frame_fsm
-make test           # Unity під ASan/UBSan
-```
-_Перевірка:_ `4 Tests 0 Failures 0 Ignored` / `OK` (чистий кадр, шум до STX,
-ре-синк на вкладеному STX, back-to-back).
+1. **Firmware `bringup`** — регістрова ISR-блималка на ESP-IDF; збірка `make build`
+   (Linux) / `.\build.ps1` (Windows), запуск у Wokwi. Деталі — у
+   [bringup/README.md](bringup/README.md).
+   _Перевірка:_ `Project build complete`; у Wokwi LED на GPIO4 блимає ~2 Гц.
+2. **host-C `isr-ringbuf`** — ISR-safe SPSC lock-free буфер; `make test` (ASan/UBSan),
+   `make tsan` (TSan, лише Linux), `make lint`. Деталі — у
+   [isr-ringbuf/README.md](isr-ringbuf/README.md).
+   _Перевірка:_ `6 Tests … OK`; TSan без data race.
+3. **host-C `frame_fsm`** — байтовий кінцевий автомат кадру; `make test`, `make lint`.
+   Деталі — у [frame_fsm/README.md](frame_fsm/README.md).
+   _Перевірка:_ `4 Tests … OK`.
 
 ## Артефакти цього модуля
 - `bringup/` — ESP-IDF-проєкт: регістровий GPIO + `gptimer`-ISR блимання, `app_main`

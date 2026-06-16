@@ -20,7 +20,7 @@ GDB + OpenOCD · FreeRTOS · GCC (`xtensa-esp32` / host) · GitHub Actions (CI)
 - [x] [M0 · Setup, мислення, інструментарій](m0-blink/README.md)
 - [ ] [M1 · Основи електроніки та вимірювань](m1-electronics/README.md)
 - [x] [M2 · C по-справжньому (хост, unit-тести)](m2-c/README.md)
-- [ ] M3 · Архітектура та bare metal
+- [x] [M3 · Архітектура та bare metal](m3-arch/README.md)
 - [ ] M4 · Сучасний C++ для embedded
 - [ ] M5 · ESP32 руками (GPIO, UART/SPI/I2C, таймери, DMA)
 - [ ] M6 · Тестування і дебаг (Unity/CppUTest, HardFault, RTT)
