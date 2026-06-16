@@ -20,3 +20,25 @@ jobs:
       - name: Explore (memory/pointers, host)
         working-directory: m2-c/explore
         run: make run
+
+  m3-arch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install cppcheck
+        run: sudo apt-get update && sudo apt-get install -y cppcheck
+      - name: isr-ringbuf — tests (ASan/UBSan)
+        working-directory: m3-arch/isr-ringbuf
+        run: make test
+      - name: isr-ringbuf — data races (TSan)
+        working-directory: m3-arch/isr-ringbuf
+        run: make tsan
+      - name: isr-ringbuf — static analysis
+        working-directory: m3-arch/isr-ringbuf
+        run: make lint
+      - name: frame_fsm — tests (ASan/UBSan)
+        working-directory: m3-arch/frame_fsm
+        run: make test
+      - name: frame_fsm — static analysis
+        working-directory: m3-arch/frame_fsm
+        run: make lint

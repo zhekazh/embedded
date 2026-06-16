@@ -130,11 +130,11 @@ _Перевірка:_ `4 Tests 0 Failures 0 Ignored` / `OK` (чистий кад
 - `test/unity/` — вендорнутий Unity для host-проєктів M3.
 
 ## CI / автоматизація
-- host-тести M3 (`isr-ringbuf` → `make test`+`make tsan`, `frame_fsm` → `make test`)
-  зелені **локально** під ASan/UBSan/TSan; firmware-build свідомо лишається поза CI.
-- Окремий CI-джоб `m3` у [.github/workflows/ci.yml](../.github/workflows/ci.yml) (зараз
-  ганяє лише `m2-c`) — наступний крок; додати за зразком джоба `m2-c` (ubuntu).
-- _Статус:_ 🟡 локально зелено; CI-джоб `m3` ще не доданий.
+- Джоб `m3-arch` у [.github/workflows/ci.yml](../.github/workflows/ci.yml) (ubuntu):
+  `isr-ringbuf` → `make test` (ASan/UBSan) + `make tsan` (TSan, гонки) + `make lint`
+  (cppcheck); `frame_fsm` → `make test` + `make lint`. Firmware-build свідомо поза CI.
+- _Статус:_ 🟢 локально зелено (6+4 тести, TSan без гонок, cppcheck `0`); у GitHub
+  Actions запуститься після push.
 
 ## Безпека / захист
 - **ISR-safe обмін без гонок:** ring buffer розрахований на одного producer (ISR) і
